@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Rogue Miner"
+config/description="A roguelite gold miner game"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/singletons/GameManager.gd"
+UpgradeManager="*res://scripts/singletons/UpgradeManager.gd"
+MetaProgression="*res://scripts/singletons/MetaProgression.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[physics]
+
+2d/default_gravity=0.0
+2d/default_linear_damp=0.0
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
