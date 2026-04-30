@@ -6,8 +6,8 @@ class_name LevelGenerator
 @export var items_root_path: NodePath
 
 # In a real game, these would be PackedScenes
-# @export var gold_scene: PackedScene
-# @export var rock_scene: PackedScene
+@export var gold_scene: PackedScene
+@export var rock_scene: PackedScene
 # @export var diamond_scene: PackedScene
 # @export var chest_scene: PackedScene
 
@@ -33,8 +33,8 @@ func generate_level(level_number: int) -> void:
 	if randf() < chest_chance:
 		num_chests = 1
 		
-	# _spawn_items(gold_scene, num_gold, items_root)
-	# _spawn_items(rock_scene, num_rocks, items_root)
+	_spawn_items(gold_scene, num_gold, items_root)
+	_spawn_items(rock_scene, num_rocks, items_root)
 	# _spawn_items(diamond_scene, num_diamonds, items_root)
 	# _spawn_items(chest_scene, num_chests, items_root)
 	

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm2h8p1g7b8d"]
+
+[ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/player/Hook.gd" id="2_hook"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_miner"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hook"]
+size = Vector2(20, 20)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_player")
+
+[node name="MinerSprite" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_miner")
+
+[node name="Hook" type="Node2D" parent="."]
+position = Vector2(0, 32)
+script = ExtResource("2_hook")
+
+[node name="Line2D" type="Line2D" parent="Hook"]
+points = PackedVector2Array(0, 0, 0, 50)
+width = 4.0
+default_color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[node name="Tip" type="Area2D" parent="Hook"]
+position = Vector2(0, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hook/Tip"]
+shape = SubResource("RectangleShape2D_hook")
+
+[node name="ClawVisual" type="ColorRect" parent="Hook/Tip"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0.752941, 0.752941, 0.752941, 1)
+
+[connection signal="area_entered" from="Hook/Tip" to="Hook" method="_on_tip_area_entered"]
