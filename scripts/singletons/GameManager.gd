@@ -26,7 +26,7 @@ func _ready() -> void:
 func start_new_run() -> void:
 	UpgradeManager.reset_run()
 	current_score = 0
-	current_coins = 0
+	current_coins = 3
 	interest_cap = 5
 	current_level = 1
 	target_quota = _calculate_quota(current_level)
@@ -67,7 +67,7 @@ func _calculate_payout() -> void:
 	payout += interest
 	
 	add_coins(payout)
-	print("Level cleared! Base: 3 | Bonus: %d | Interest: %d | Total Payout: %d" % [floor((current_score - target_quota)/100.0) if current_score>target_quota else 0, interest, payout])
+	print("Level cleared! Base: 3 | Bonus: %d | Interest: %d | Total Payout: %d" % [floor((current_score - target_quota)/50.0) if current_score>target_quota else 0, interest, payout])
 
 
 func advance_to_next_level() -> void:

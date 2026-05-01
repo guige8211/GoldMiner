@@ -7,7 +7,7 @@ const UPGRADES = {
 	"oil_can": {
 		"name": "Oil Can",
 		"desc": "Increases base hook speed by 20%.",
-		"price": 3,
+		"price": 2,
 		"type": "static",
 		"stat": "hook_speed_multiplier",
 		"value": 0.2,
@@ -16,7 +16,7 @@ const UPGRADES = {
 	"lucky_clover": {
 		"name": "Lucky Clover",
 		"desc": "Increases the chance of Diamonds spawning.",
-		"price": 8,
+		"price": 5,
 		"type": "static",
 		"stat": "diamond_spawn_chance_bonus",
 		"value": 0.15,
@@ -27,7 +27,7 @@ const UPGRADES = {
 	"geologist": {
 		"name": "Geologist",
 		"desc": "Rocks are now worth 80 base score.",
-		"price": 5,
+		"price": 4,
 		"type": "dynamic",
 		"color": Color(0.4, 0.4, 0.4)
 	},
@@ -36,21 +36,21 @@ const UPGRADES = {
 	"gold_rush": {
 		"name": "Gold Rush",
 		"desc": "Whenever you grab a small gold nugget, gain 1 Coin immediately.",
-		"price": 5,
+		"price": 4,
 		"type": "dynamic",
 		"color": Color(1.0, 0.9, 0.0)
 	},
 	"greedy_pot": {
 		"name": "Greedy Pot",
 		"desc": "Increases max interest cap from 5 to 15.",
-		"price": 8,
+		"price": 6,
 		"type": "dynamic",
 		"color": Color(0.8, 0.6, 0.1)
 	},
 	"appraisal": {
 		"name": "Appraisal",
 		"desc": "All items give +30 flat score.",
-		"price": 4,
+		"price": 3,
 		"type": "dynamic",
 		"color": Color(0.6, 0.8, 1.0)
 	},
@@ -59,14 +59,14 @@ const UPGRADES = {
 	"pocket_watch": {
 		"name": "Pocket Watch",
 		"desc": "Every item grabbed adds 2 seconds to the clock.",
-		"price": 10,
+		"price": 6,
 		"type": "dynamic",
 		"color": Color(0.9, 0.9, 0.8)
 	},
 	"finale": {
 		"name": "Grand Finale",
 		"desc": "In the last 10 seconds of a run, all items are worth 2x score.",
-		"price": 12,
+		"price": 8,
 		"type": "dynamic",
 		"color": Color(1.0, 0.3, 0.3)
 	},
@@ -75,7 +75,7 @@ const UPGRADES = {
 	"metronome": {
 		"name": "Metronome",
 		"desc": "Each successful consecutive grab makes the hook 10% faster. Resets on miss.",
-		"price": 8,
+		"price": 5,
 		"type": "dynamic",
 		"color": Color(0.8, 0.4, 0.8)
 	}
