@@ -1,44 +1,14 @@
-; Engine configuration file.
-; It's best edited using the editor UI and not directly,
-; since the parameters that go here are not all obvious.
-;
-; Format:
-;   [section] ; section goes between []
-;   param=value ; assign values to parameters
+with open("project.godot", "r") as f:
+    content = f.read()
 
-config_version=5
+# Let's fix this properly. If it says drop_hook doesn't exist, it means my previous append didn't format correctly
+# or it was placed wrong.
+import re
 
-[application]
-run/main_scene="res://scenes/Level.tscn"
+# Remove any existing [input] section
+content = re.sub(r'\[input\].*', '', content, flags=re.DOTALL)
 
-config/name="Rogue Miner"
-config/description="A roguelite gold miner game"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
-
-[autoload]
-
-GameManager="*res://scripts/singletons/GameManager.gd"
-UpgradeManager="*res://scripts/singletons/UpgradeManager.gd"
-MetaProgression="*res://scripts/singletons/MetaProgression.gd"
-
-[display]
-
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
-
-[physics]
-
-2d/default_gravity=0.0
-2d/default_linear_damp=0.0
-
-[rendering]
-
-renderer/rendering_method="forward_plus"
-
-[input]
+input_section = """[input]
 
 ui_accept={
 "deadzone": 0.5,
@@ -51,3 +21,7 @@ drop_hook={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+"""
+
+with open("project.godot", "w") as f:
+    f.write(content.strip() + "\n\n" + input_section)
