@@ -47,9 +47,12 @@ func generate_level(level_number: int, target_quota: int) -> void:
 	
 	# 2.5 Force Easy Start for Level 1
 	if level_number == 1:
-		for i in range(3):
+		for i in range(5):
 			_spawn_specific_item("gold_small", items_root, spawned_positions, spawn_counts, ITEMS)
 			current_value += ITEMS["gold_small"]["value"]
+		for i in range(3):
+			_spawn_specific_item("gold_large", items_root, spawned_positions, spawn_counts, ITEMS)
+			current_value += ITEMS["gold_large"]["value"]
 
 	# Loop until our spawned items reach the required budget
 	while current_value < value_budget:

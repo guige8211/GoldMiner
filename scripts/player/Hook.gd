@@ -7,7 +7,7 @@ enum HookState { SWINGING, EXTENDING, RETRACTING }
 @export var swing_speed: float = 60.0 # Degrees per second
 @export var extend_speed: float = 400.0 # Pixels per second
 @export var base_retract_speed: float = 400.0 # Pixels per second
-@export var max_length: float = 600.0
+@export var max_length: float = 800.0
 
 var current_state: HookState = HookState.SWINGING
 var swing_direction: int = 1

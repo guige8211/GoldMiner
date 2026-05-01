@@ -32,6 +32,6 @@ shape = SubResource("RectangleShape2D_hook")
 
 [node name="ClawVisual" type="Polygon2D" parent="Hook/Tip"]
 color = Color(0.8, 0.8, 0.8, 1)
-polygon = PackedVector2Array(-15, -10, 15, -10, 0, 20)
+polygon = PackedVector2Array(-12, -5, 12, -5, 0, 15)
 
 [connection signal="area_entered" from="Hook/Tip" to="Hook" method="_on_tip_area_entered"]
