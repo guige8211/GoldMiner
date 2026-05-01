@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://gold_large_uid"]
+[ext_resource type="Script" path="res://scripts/items/ItemBase.gd" id="1_item"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_item"]
+size = Vector2(60, 60)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_item"]
+size = Vector2(60, 60)
+[node name="GoldLarge" type="Area2D"]
+script = ExtResource("1_item")
+item_name = "Large Gold"
+base_value = 250
+weight = 3.5
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.74902, 0, 1)
+texture = SubResource("PlaceholderTexture2D_item")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_item")
