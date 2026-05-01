@@ -26,7 +26,10 @@ func _ready() -> void:
 	_on_score_changed(GameManager.current_score)
 	_on_coins_changed(GameManager.current_coins)
 	_on_quota_changed(GameManager.target_quota)
-	_on_level_changed(GameManager.current_level)
+	
+	# Only manually trigger level generation if we didn't just start a new run
+	if GameManager.current_level > 1 or GameManager.current_score > 0:
+		_on_level_changed(GameManager.current_level)
 	
 	# Start the timer for this level
 	GameManager.start_level()

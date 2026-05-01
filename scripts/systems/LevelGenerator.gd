@@ -21,7 +21,12 @@ func generate_level(level_number: int, target_quota: int) -> void:
 		"rock": {"scene": rock_scene, "value": 10, "radius": 35}
 	}
 	var items_root = get_node(items_root_path)
+	print("Generating level: ", level_number, " with quota: ", target_quota)
 	if items_root:
+		print("Items root found")
+	else:
+		print("ERROR: Items root NOT found!")
+		return
 		for child in items_root.get_children():
 			child.queue_free()
 	
