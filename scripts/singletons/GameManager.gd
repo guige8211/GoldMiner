@@ -79,9 +79,12 @@ func advance_to_next_level() -> void:
 	quota_changed.emit(target_quota)
 	# start_level will be called by Level.gd when it loads
 
-func add_gold(amount: int) -> void:
-	current_gold += amount
+func add_score(amount: int) -> void:
+	current_score += amount
 	score_changed.emit(current_score)
+
+func add_coins(amount: int) -> void:
+	current_coins += amount
 	coins_changed.emit(current_coins)
 
 func _on_timer_tick() -> void:
