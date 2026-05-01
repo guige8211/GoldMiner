@@ -30,14 +30,13 @@ function sleep(ms) {
   await page.goto('https://guige8211.github.io/GoldMiner/?bust=' + new Date().getTime(), { waitUntil: 'networkidle' });
   await page.waitForTimeout(15000); 
   
-  await page.screenshot({ path: 'game_screenshot_final2.png', fullPage: true });
+  await page.screenshot({ path: 'game_screenshot_final3.png', fullPage: true });
   await browser.close();
   
   if (hasErrors) {
       console.log("STILL HAS SCRIPT ERRORS");
   } else {
       console.log("NO SCRIPT ERRORS DETECTED!");
-      // Let's run our color test
       execSync("node test_ui_final.js");
   }
 })();

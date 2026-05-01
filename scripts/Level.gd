@@ -19,7 +19,7 @@ func _ready() -> void:
 		GameManager.game_over.connect(_on_game_over)
 	
 	# If level is 1 and gold is 0, we assume it's a new run
-	if GameManager.current_level == 1 and GameManager.current_gold == 0 and not GameManager.is_in_level:
+	if GameManager.current_level == 1 and GameManager.current_score == 0 and not GameManager.is_in_level:
 		GameManager.start_new_run()
 		
 	# Trigger the UI update manually for when we return from shop
