@@ -30,7 +30,7 @@ func _on_timer_updated(time_left: float) -> void:
 
 func _on_level_changed(new_level: int) -> void:
 	level_label.text = "Level %d" % new_level
-	level_generator.generate_level(new_level)
+	level_generator.generate_level(new_level, GameManager.target_quota)
 	message_label.hide()
 
 func _on_level_completed() -> void:
