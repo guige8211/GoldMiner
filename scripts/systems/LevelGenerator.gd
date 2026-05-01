@@ -74,6 +74,7 @@ func _spawn_specific_item(item_key: String, root: Node, spawned_positions: Array
 	var data = ITEMS[item_key]
 	var scene = data["scene"] as PackedScene
 	if not scene:
+		print("ERROR: Scene for ", item_key, " is NULL! Did you assign it in the inspector?")
 		return
 		
 	var item = scene.instantiate()
