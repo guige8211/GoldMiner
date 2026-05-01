@@ -14,7 +14,7 @@ class_name LevelGenerator
 var base_k_factor: float = 1.5
 
 # Item definitions for the generator
-const ITEMS = {
+var ITEMS = {
 	"gold_small": {"scene": null, "value": 50, "radius": 20},
 	"gold_large": {"scene": null, "value": 250, "radius": 40},
 	"diamond": {"scene": null, "value": 600, "radius": 15},
