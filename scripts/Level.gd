@@ -9,8 +9,9 @@ extends Node2D
 
 func _ready() -> void:
 	# Connect to GameManager signals
-	if not GameManager.gold_changed.is_connected(_on_gold_changed):
-		GameManager.gold_changed.connect(_on_gold_changed)
+	if not GameManager.score_changed.is_connected(_on_score_changed):
+		GameManager.score_changed.connect(_on_score_changed)
+		GameManager.coins_changed.connect(_on_coins_changed)
 		GameManager.quota_changed.connect(_on_quota_changed)
 		GameManager.timer_updated.connect(_on_timer_updated)
 		GameManager.level_changed.connect(_on_level_changed)
@@ -22,18 +23,22 @@ func _ready() -> void:
 		GameManager.start_new_run()
 		
 	# Trigger the UI update manually for when we return from shop
-	_on_gold_changed(GameManager.current_gold)
+	_on_score_changed(GameManager.current_score)
+	_on_coins_changed(GameManager.current_coins)
 	_on_quota_changed(GameManager.target_quota)
 	_on_level_changed(GameManager.current_level)
 	
 	# Start the timer for this level
 	GameManager.start_level()
 
-func _on_gold_changed(new_gold: int) -> void:
-	gold_label.text = "Gold: $%d" % new_gold
+func _on_score_changed(new_score: int) -> void:
+	gold_label.text = "Score: %d" % new_score
+
+func _on_coins_changed(new_coins: int) -> void:
+	pass # Could display coins in level too if wanted
 
 func _on_quota_changed(new_quota: int) -> void:
-	quota_label.text = "Target: $%d" % new_quota
+	quota_label.text = "Target: %d" % new_quota
 
 func _on_timer_updated(time_left: float) -> void:
 	time_label.text = "Time: %d" % int(time_left)

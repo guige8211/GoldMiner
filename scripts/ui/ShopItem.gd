@@ -15,7 +15,7 @@ func setup(data: Dictionary, current_gold: int) -> void:
 	item_data = data
 	name_label.text = data.get("name", "Unknown")
 	desc_label.text = data.get("desc", "No description.")
-	price_label.text = "$%d" % data.get("price", 999)
+	price_label.text = "Cost: %d" % data.get("price", 99)
 	
 	if data.has("color"):
 		icon_rect.color = data["color"]

@@ -42,7 +42,7 @@ offset_top = 20.0
 offset_right = 230.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 24
-text = "Gold: $0"
+text = "Score: 0"
 
 [node name="QuotaLabel" type="Label" parent="UI/HUD/TopPanel"]
 layout_mode = 0
@@ -52,7 +52,7 @@ offset_right = 500.0
 offset_bottom = 60.0
 theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
 theme_override_font_sizes/font_size = 24
-text = "Target: $100"
+text = "Target: 100"
 
 [node name="TimeLabel" type="Label" parent="UI/HUD/TopPanel"]
 layout_mode = 1

@@ -18,10 +18,10 @@ func collect() -> void:
 	match type:
 		ItemType.GOLD:
 			var final_value = int(base_value * UpgradeManager.gold_value_multiplier)
-			GameManager.add_gold(final_value)
+			GameManager.add_score(final_value)
 		ItemType.ROCK:
 			var final_value = int(base_value * UpgradeManager.rock_value_multiplier)
-			GameManager.add_gold(final_value)
+			GameManager.add_score(final_value)
 		ItemType.DIAMOND:
 			GameManager.add_gold(base_value)
 		ItemType.CHEST:
