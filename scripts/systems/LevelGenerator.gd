@@ -15,10 +15,10 @@ var base_k_factor: float = 1.5
 
 func generate_level(level_number: int, target_quota: int) -> void:
 	var ITEMS = {
-		"gold_small": {"scene": gold_small_scene, "value": 50, "radius": 20},
-		"gold_large": {"scene": gold_large_scene, "value": 250, "radius": 40},
-		"diamond": {"scene": diamond_scene, "value": 600, "radius": 15},
-		"rock": {"scene": rock_scene, "value": 10, "radius": 35}
+		"gold_small": {"scene": load("res://scenes/items/GoldSmall.tscn"), "value": 50, "radius": 20},
+		"gold_large": {"scene": load("res://scenes/items/GoldLarge.tscn"), "value": 250, "radius": 40},
+		"diamond": {"scene": load("res://scenes/items/Diamond.tscn"), "value": 600, "radius": 15},
+		"rock": {"scene": load("res://scenes/items/Rock.tscn"), "value": 10, "radius": 35}
 	}
 	var items_root = get_node(items_root_path)
 	print("Generating level: ", level_number, " with quota: ", target_quota)
