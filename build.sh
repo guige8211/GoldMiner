@@ -23,6 +23,9 @@ mv temp_templates/templates/* ~/.local/share/godot/export_templates/${GODOT_VERS
 rm -rf temp_templates
 
 # 3. Build HTML5
+echo "Importing resources..."
+$GODOT_BIN --headless --editor --quit
+
 echo "Exporting to HTML5..."
 mkdir -p public
 $GODOT_BIN --headless --export-release "Web" ./public/index.html
