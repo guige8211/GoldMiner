@@ -12,6 +12,6 @@ func _process(delta: float) -> void:
 	if not GameManager.is_in_level:
 		return
 		
-	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("drop_hook"):
+	if Input.is_action_just_pressed("ui_accept") or Input.is_key_pressed(KEY_SPACE) or Input.is_key_pressed(KEY_DOWN):
 		if hook.current_state == hook.HookState.SWINGING:
 			hook.fire()
