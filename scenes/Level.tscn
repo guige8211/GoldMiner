@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dm2h8p1g7b8d" path="res://scenes/Player.tscn" id="2_player"]
 [ext_resource type="Script" path="res://scripts/systems/LevelGenerator.gd" id="3_gen"]
 
-[ext_resource type="PackedScene" uid="uid://gold_small_uid" path="res://scenes/items/GoldSmall.tscn" id="4_gold_small"]
-[ext_resource type="PackedScene" uid="uid://gold_large_uid" path="res://scenes/items/GoldLarge.tscn" id="5_gold_large"]
-[ext_resource type="PackedScene" uid="uid://rock_uid" path="res://scenes/items/Rock.tscn" id="6_rock"]
-[ext_resource type="PackedScene" uid="uid://diamond_uid" path="res://scenes/items/Diamond.tscn" id="7_diamond"]
+[ext_resource type="PackedScene" path="res://scenes/items/GoldSmall.tscn" id="4_gold_small"]
+[ext_resource type="PackedScene" path="res://scenes/items/GoldLarge.tscn" id="5_gold_large"]
+[ext_resource type="PackedScene" path="res://scenes/items/Rock.tscn" id="6_rock"]
+[ext_resource type="PackedScene" path="res://scenes/items/Diamond.tscn" id="7_diamond"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_level")
