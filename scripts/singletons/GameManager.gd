@@ -66,4 +66,4 @@ func _on_timer_tick() -> void:
 
 func _calculate_quota(level: int) -> int:
 	# A simple exponential/linear curve for testing
-	return int(100 * level + pow(level, 1.5) * 50)
+	return 100 + (level - 1) * 150
