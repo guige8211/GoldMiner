@@ -13,21 +13,13 @@ class_name LevelGenerator
 # Meta K value (currently 1.5 to give the player 50% more value than needed to pass)
 var base_k_factor: float = 1.5
 
-# Item definitions for the generator
-var ITEMS = {
-	"gold_small": {"scene": null, "value": 50, "radius": 20},
-	"gold_large": {"scene": null, "value": 250, "radius": 40},
-	"diamond": {"scene": null, "value": 600, "radius": 15},
-	"rock": {"scene": null, "value": 10, "radius": 35} # Rocks are hazards, value doesn't count towards budget
-}
-
-func _ready() -> void:
-	ITEMS["gold_small"]["scene"] = gold_small_scene
-	ITEMS["gold_large"]["scene"] = gold_large_scene
-	ITEMS["diamond"]["scene"] = diamond_scene
-	ITEMS["rock"]["scene"] = rock_scene
-
 func generate_level(level_number: int, target_quota: int) -> void:
+	var ITEMS = {
+		"gold_small": {"scene": gold_small_scene, "value": 50, "radius": 20},
+		"gold_large": {"scene": gold_large_scene, "value": 250, "radius": 40},
+		"diamond": {"scene": diamond_scene, "value": 600, "radius": 15},
+		"rock": {"scene": rock_scene, "value": 10, "radius": 35}
+	}
 	var items_root = get_node(items_root_path)
 	if items_root:
 		for child in items_root.get_children():
@@ -61,19 +53,19 @@ func generate_level(level_number: int, target_quota: int) -> void:
 		else:
 			choice = "diamond"
 			
-		_spawn_specific_item(choice, items_root, spawned_positions, spawn_counts)
+		_spawn_specific_item(choice, items_root, spawned_positions, spawn_counts, ITEMS)
 		current_value += ITEMS[choice]["value"]
 	
 	# 3. Spawn Hazards (Rocks) based on difficulty
 	# Rocks act as physical blockers. The higher the level, the more rocks.
 	var num_rocks = 2 + int(level_number * 1.5) + (randi() % 3)
 	for i in range(num_rocks):
-		_spawn_specific_item("rock", items_root, spawned_positions, spawn_counts)
+		_spawn_specific_item("rock", items_root, spawned_positions, spawn_counts, ITEMS)
 	
 	print("Level %d Generated. Quota: $%d | Total Value on field: $%d" % [level_number, target_quota, current_value])
 	print("Spawns: ", spawn_counts)
 
-func _spawn_specific_item(item_key: String, root: Node, spawned_positions: Array[Vector2], spawn_counts: Dictionary) -> void:
+func _spawn_specific_item(item_key: String, root: Node, spawned_positions: Array[Vector2], spawn_counts: Dictionary, ITEMS: Dictionary) -> void:
 	var data = ITEMS[item_key]
 	var scene = data["scene"] as PackedScene
 	if not scene:
