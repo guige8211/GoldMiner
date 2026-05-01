@@ -45,6 +45,12 @@ func generate_level(level_number: int, target_quota: int) -> void:
 	var weight_small = 40 # Relatively stable
 	var weight_diamond = min(50, 5 + (level_number * 4)) # Rises as level goes up
 	
+	# 2.5 Force Easy Start for Level 1
+	if level_number == 1:
+		for i in range(3):
+			_spawn_specific_item("gold_small", items_root, spawned_positions, spawn_counts, ITEMS)
+			current_value += ITEMS["gold_small"]["value"]
+
 	# Loop until our spawned items reach the required budget
 	while current_value < value_budget:
 		var total_weight = weight_large + weight_small + weight_diamond
@@ -63,9 +69,12 @@ func generate_level(level_number: int, target_quota: int) -> void:
 	
 	# 3. Spawn Hazards (Rocks) based on difficulty
 	# Rocks act as physical blockers. The higher the level, the more rocks.
-	var num_rocks = 2 + int(level_number * 1.5) + (randi() % 3)
-	for i in range(num_rocks):
-		_spawn_specific_item("rock", items_root, spawned_positions, spawn_counts, ITEMS)
+	# Level 1 has NO rocks.
+	var num_rocks = 0
+	if level_number > 1:
+		num_rocks = 1 + int(level_number * 1.2) + (randi() % 2)
+		for i in range(num_rocks):
+			_spawn_specific_item("rock", items_root, spawned_positions, spawn_counts, ITEMS)
 	
 	print("Level %d Generated. Quota: $%d | Total Value on field: $%d" % [level_number, target_quota, current_value])
 	print("Spawns: ", spawn_counts)

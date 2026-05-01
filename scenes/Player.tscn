@@ -30,11 +30,8 @@ position = Vector2(0, 50)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hook/Tip"]
 shape = SubResource("RectangleShape2D_hook")
 
-[node name="ClawVisual" type="ColorRect" parent="Hook/Tip"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-color = Color(0.752941, 0.752941, 0.752941, 1)
+[node name="ClawVisual" type="Polygon2D" parent="Hook/Tip"]
+color = Color(0.8, 0.8, 0.8, 1)
+polygon = PackedVector2Array(-15, -10, 15, -10, 0, 20)
 
 [connection signal="area_entered" from="Hook/Tip" to="Hook" method="_on_tip_area_entered"]
