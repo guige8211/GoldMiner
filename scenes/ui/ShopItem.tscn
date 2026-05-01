@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://shop_item_uid"]
+
+[ext_resource type="Script" path="res://scripts/ui/ShopItem.gd" id="1_item"]
+
+[node name="ShopItem" type="Panel"]
+custom_minimum_size = Vector2(250, 300)
+script = ExtResource("1_item")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Item Name"
+horizontal_alignment = 1
+
+[node name="IconRect" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="DescLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Item description goes here. It does something cool."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+text = "$150"
+horizontal_alignment = 1
+
+[node name="BuyButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "BUY"
+
+[connection signal="pressed" from="VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]

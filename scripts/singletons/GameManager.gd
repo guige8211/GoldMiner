@@ -21,13 +21,14 @@ func _ready() -> void:
 	timer.timeout.connect(_on_timer_tick)
 	
 func start_new_run() -> void:
+	UpgradeManager.reset_run()
 	current_gold = 0
 	current_level = 1
 	target_quota = _calculate_quota(current_level)
 	gold_changed.emit(current_gold)
 	quota_changed.emit(target_quota)
 	level_changed.emit(current_level)
-	start_level()
+	# start_level will be called by Level.gd
 
 func start_level() -> void:
 	time_left = 60.0 # Base time, can be modified by UpgradeManager later
@@ -51,7 +52,7 @@ func advance_to_next_level() -> void:
 	target_quota = _calculate_quota(current_level)
 	level_changed.emit(current_level)
 	quota_changed.emit(target_quota)
-	start_level()
+	# start_level will be called by Level.gd when it loads
 
 func add_gold(amount: int) -> void:
 	current_gold += amount

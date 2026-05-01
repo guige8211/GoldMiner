@@ -9,15 +9,25 @@ extends Node2D
 
 func _ready() -> void:
 	# Connect to GameManager signals
-	GameManager.gold_changed.connect(_on_gold_changed)
-	GameManager.quota_changed.connect(_on_quota_changed)
-	GameManager.timer_updated.connect(_on_timer_updated)
-	GameManager.level_changed.connect(_on_level_changed)
-	GameManager.level_completed.connect(_on_level_completed)
-	GameManager.game_over.connect(_on_game_over)
+	if not GameManager.gold_changed.is_connected(_on_gold_changed):
+		GameManager.gold_changed.connect(_on_gold_changed)
+		GameManager.quota_changed.connect(_on_quota_changed)
+		GameManager.timer_updated.connect(_on_timer_updated)
+		GameManager.level_changed.connect(_on_level_changed)
+		GameManager.level_completed.connect(_on_level_completed)
+		GameManager.game_over.connect(_on_game_over)
 	
-	# Start the first run
-	GameManager.start_new_run()
+	# If level is 1 and gold is 0, we assume it's a new run
+	if GameManager.current_level == 1 and GameManager.current_gold == 0 and not GameManager.is_in_level:
+		GameManager.start_new_run()
+		
+	# Trigger the UI update manually for when we return from shop
+	_on_gold_changed(GameManager.current_gold)
+	_on_quota_changed(GameManager.target_quota)
+	_on_level_changed(GameManager.current_level)
+	
+	# Start the timer for this level
+	GameManager.start_level()
 
 func _on_gold_changed(new_gold: int) -> void:
 	gold_label.text = "Gold: $%d" % new_gold
@@ -41,7 +51,7 @@ func _on_level_completed() -> void:
 	# In a real game, you would transition to the shop here
 	# For prototype, we'll just wait 2 seconds and advance
 	await get_tree().create_timer(2.0).timeout
-	GameManager.advance_to_next_level()
+	get_tree().change_scene_to_file("res://scenes/Shop.tscn")
 
 func _on_game_over() -> void:
 	message_label.text = "GAME OVER\nFAILED QUOTA"
