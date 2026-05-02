@@ -10,6 +10,7 @@ func _ready() -> void:
 	_update_gold_display()
 	_generate_shop_items()
 	GameManager.coins_changed.connect(_on_coins_changed)
+	_update_inventory()
 
 func _update_gold_display() -> void:
 	gold_label.text = "Coins: %d" % GameManager.current_coins
@@ -43,6 +44,7 @@ func _on_item_purchased(item_data: Dictionary, shop_item_node: ShopItem) -> void
 		
 		# Apply the upgrade via UpgradeManager's new method
 		UpgradeManager.add_upgrade(item_data["id"])
+		_update_inventory()
 		
 		shop_item_node.mark_sold()
 
@@ -50,3 +52,21 @@ func _on_next_level_pressed() -> void:
 	# We transition back to Level.tscn, and GameManager advances level
 	GameManager.advance_to_next_level()
 	get_tree().change_scene_to_file("res://scenes/Level.tscn")
+
+
+func _update_inventory() -> void:
+	var grid = get_node_or_null("InventoryPanel/ScrollContainer/InventoryGrid")
+	if not grid: return
+	
+	for child in grid.get_children():
+		child.queue_free()
+		
+	for item_id in UpgradeManager.active_items:
+		var data = ItemDB.get_upgrade(item_id)
+		if data.is_empty(): continue
+		
+		var icon = ColorRect.new()
+		icon.custom_minimum_size = Vector2(60, 60)
+		icon.color = data.get("color", Color.WHITE)
+		icon.tooltip_text = data.get("name", "") + "\n" + data.get("desc", "")
+		grid.add_child(icon)

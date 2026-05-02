@@ -34,6 +34,26 @@ func _ready() -> void:
 	# Start the timer for this level
 	GameManager.start_level()
 
+	_update_inventory()
+
+func _update_inventory() -> void:
+	var grid = get_node_or_null("UI/InventoryPanel/ScrollContainer/InventoryGrid")
+	if not grid: return
+	
+	for child in grid.get_children():
+		child.queue_free()
+		
+	for item_id in UpgradeManager.active_items:
+		var data = ItemDB.get_upgrade(item_id)
+		if data.is_empty(): continue
+		
+		var icon = ColorRect.new()
+		icon.custom_minimum_size = Vector2(60, 60)
+		icon.color = data.get("color", Color.WHITE)
+		icon.tooltip_text = data.get("name", "") + "\n" + data.get("desc", "")
+		grid.add_child(icon)
+
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("gm_collect_all") or Input.is_key_pressed(KEY_K):
