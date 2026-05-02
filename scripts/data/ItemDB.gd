@@ -1,6 +1,5 @@
 extends Node
 
-class_name ItemDB
 
 const UPGRADES = {
 	# --- BASE / STATIC UPGRADES ---
