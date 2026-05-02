@@ -115,8 +115,7 @@ const UPGRADES = {
 		"price": 20,
 		"type": "dynamic",
 		"color": Color(1.0, 0.8, 0.4)
-	}
-
+	},
 	"metronome": {
 		"name": "Metronome",
 		"desc": "Each successful consecutive grab makes the hook 10% faster. Resets on miss.",
