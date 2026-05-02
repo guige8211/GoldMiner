@@ -84,10 +84,11 @@ func _update_hook_position() -> void:
 	if line_node:
 		line_node.points = [Vector2.ZERO, tip_pos]
 		
-	# Keep AimLine pointing correctly regardless of length
+	# Fix AimLine offset: The rope starts at (0,0), tip defaults at (0,50). 
+	# The AimLine should start exactly where the tip is and point downwards.
 	var aim_line = get_node_or_null("AimLine")
 	if aim_line and current_state == HookState.SWINGING:
-		aim_line.points = [Vector2.ZERO, dir * 800.0]
+		aim_line.points = [tip_pos, Vector2.DOWN * 1200.0]
 
 func fire() -> void:
 	if current_state == HookState.SWINGING:
