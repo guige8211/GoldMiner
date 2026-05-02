@@ -64,7 +64,11 @@ func _calculate_payout() -> void:
 		payout += floor(extra / 30.0)
 		
 	# 3. Interest (1 coin per 5 held, capped at interest_cap)
-	var interest = min(floor(current_coins / 5), interest_cap)
+	var interest = 0
+	if UpgradeManager.has_upgrade("compound_interest"):
+		interest = floor(current_coins * 0.1) # 10% of total wealth, NO CAP!
+	else:
+		interest = min(floor(current_coins / 5), interest_cap)
 	payout += interest
 	
 	add_coins(payout)

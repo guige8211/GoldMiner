@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 
 func _process_swing(delta: float) -> void:
 	# Modulate swing speed based on upgrades if needed
-	var actual_swing_speed = swing_speed * UpgradeManager.hook_speed_multiplier
+	var actual_swing_speed = swing_speed * UpgradeManager.hook_speed_multiplier * UpgradeManager.hook_swing_multiplier
 	rotation_degrees += swing_direction * actual_swing_speed * delta
 	
 	if rotation_degrees >= max_swing_angle:
