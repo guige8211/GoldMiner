@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+EventBus="*res://scripts/singletons/EventBus.gd"
+ItemDB="*res://scripts/data/ItemDB.gd"
 GameManager="*res://scripts/singletons/GameManager.gd"
 UpgradeManager="*res://scripts/singletons/UpgradeManager.gd"
 MetaProgression="*res://scripts/singletons/MetaProgression.gd"
