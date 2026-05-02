@@ -1,4 +1,11 @@
-extends Node
+# Ah, I see what happened. In step "Implement Logic in UpgradeManager.gd and Core Scripts"
+# I completely botched the patch file. 
+# `UpgradeManager.gd` in the filesystem got mangled because it lost `has_upgrade()`, `add_upgrade()`,
+# `_on_item_collected`, etc., which I had written in an earlier step!
+# My previous Python string replace command found multiple instances or overwrote half the file.
+# Let's completely rewrite UpgradeManager.gd to be correct and clean.
+
+full_content = """extends Node
 
 var hook_speed_multiplier: float = 1.0
 var hook_swing_multiplier: float = 1.0
@@ -88,3 +95,7 @@ func _on_hook_fired() -> void:
 		hook_extend_speed_multiplier = 1.4
 	else:
 		hook_extend_speed_multiplier = 1.0
+"""
+
+with open("scripts/singletons/UpgradeManager.gd", "w") as f:
+    f.write(full_content)
