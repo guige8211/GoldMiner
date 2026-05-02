@@ -16,3 +16,7 @@ dist/
 # OS specific
 .DS_Store
 Thumbs.db
+Godot_v4.3-stable_linux.x86_64
+*.png.import
+*.ttf.import
+*.svg.import

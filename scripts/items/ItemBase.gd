@@ -29,4 +29,3 @@ func collect() -> void:
 		GameManager.add_score(final_value)
 		
 	# Notify systems that an item was successfully collected
-	EventBus.item_collected.emit(self)
