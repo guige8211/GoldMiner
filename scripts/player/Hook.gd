@@ -69,8 +69,10 @@ func _update_hook_position() -> void:
 	# Calculate the tip position based on current angle and length
 	# In a real setup, you'd move the tip CharacterBody2D or Area2D
 	# and draw a Line2D from origin to tip.
-	var dir = Vector2.DOWN.rotated(rotation)
-	var tip_pos = dir * current_length
+	# Hook node itself rotates, so local downward direction is always just Vector2.DOWN
+	var dir = Vector2.DOWN
+	# The base length of the rope starts at 50 (from 0,0 to 0,50 where Tip sits initially)
+	var tip_pos = dir * (50.0 + current_length)
 	
 	# Assuming there's a child node called "Tip" that has the Area2D
 	var tip_node = get_node_or_null("Tip")
@@ -81,6 +83,11 @@ func _update_hook_position() -> void:
 	var line_node = get_node_or_null("Line2D")
 	if line_node:
 		line_node.points = [Vector2.ZERO, tip_pos]
+		
+	# Keep AimLine pointing correctly regardless of length
+	var aim_line = get_node_or_null("AimLine")
+	if aim_line and current_state == HookState.SWINGING:
+		aim_line.points = [Vector2.ZERO, dir * 800.0]
 
 func fire() -> void:
 	if current_state == HookState.SWINGING:
