@@ -15,21 +15,18 @@ func get_weight() -> float:
 	return weight
 
 func collect() -> void:
-	match type:
-		ItemType.GOLD:
-			var final_value = int(base_value * UpgradeManager.gold_value_multiplier)
-			GameManager.add_score(final_value)
-		ItemType.ROCK:
-			var final_value = int(base_value * UpgradeManager.rock_value_multiplier)
-			GameManager.add_score(final_value)
-		ItemType.DIAMOND:
-			GameManager.add_gold(base_value)
-		ItemType.CHEST:
-			UpgradeManager.add_pending_chest()
-			# Maybe add a small base value for opening a chest too
-			GameManager.add_gold(base_value)
-		ItemType.MYSTERY:
-			# Implement mystery logic (random gold, bomb, etc)
-			pass
+	var context = {
+		"base_value": base_value,
+		"multiplier": 1.0
+	}
 	
-	# Play particle effects / sound here
+	# Allow upgrades to modify context via EventBus
+	EventBus.request_item_value_modifiers.emit(self, context)
+	
+	var final_value = int(context["base_value"] * context["multiplier"])
+	
+	if final_value > 0:
+		GameManager.add_score(final_value)
+		
+	# Notify systems that an item was successfully collected
+	EventBus.item_collected.emit(self)
