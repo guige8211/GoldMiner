@@ -34,6 +34,21 @@ func _ready() -> void:
 	# Start the timer for this level
 	GameManager.start_level()
 
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("gm_collect_all") or Input.is_key_pressed(KEY_K):
+		_gm_collect_all()
+
+func _gm_collect_all() -> void:
+	var items_root = get_node_or_null("ItemsRoot")
+	if not items_root: return
+	
+	print("GM: Collecting all valuable items!")
+	for child in items_root.get_children():
+		if child.has_method("collect") and child.get("type") != 1: # 1 is ROCK
+			child.collect()
+			child.queue_free()
+
 func _on_score_changed(new_score: int) -> void:
 	gold_label.text = "Score: %d" % new_score
 
