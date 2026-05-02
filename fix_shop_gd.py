@@ -1,4 +1,14 @@
-extends Control
+import re
+
+with open("scripts/ui/Shop.gd", "r") as f:
+    content = f.read()
+
+# Ah! Shop.gd is still using its own hardcoded `upgrade_pool` instead of `ItemDB.get_random_upgrades()`.
+# The patch I made for this in "Refactor UpgradeManager.gd for Modifiers" step
+# apparently got completely wiped out during a git rebase conflict a while ago!
+# That explains why the user is still seeing prices like 100, 150, 250!
+
+new_shop = """extends Control
 class_name Shop
 
 @export var shop_item_scene: PackedScene
@@ -50,3 +60,7 @@ func _on_next_level_pressed() -> void:
 	# We transition back to Level.tscn, and GameManager advances level
 	GameManager.advance_to_next_level()
 	get_tree().change_scene_to_file("res://scenes/Level.tscn")
+"""
+
+with open("scripts/ui/Shop.gd", "w") as f:
+    f.write(new_shop)
