@@ -54,13 +54,14 @@ func end_level() -> void:
 
 func _calculate_payout() -> void:
 	var payout = 0
-	# 1. Base Payout
-	payout += 3
+	# 1. Base Payout scales with level
+	var base_pay = 3 + current_level
+	payout += base_pay
 	
-	# 2. Over-quota bonus (1 coin per 100 extra score)
+	# 2. Over-quota bonus (1 coin per 30 extra score)
 	if current_score > target_quota:
 		var extra = current_score - target_quota
-		payout += floor(extra / 100)
+		payout += floor(extra / 30.0)
 		
 	# 3. Interest (1 coin per 5 held, capped at interest_cap)
 	var interest = min(floor(current_coins / 5), interest_cap)
