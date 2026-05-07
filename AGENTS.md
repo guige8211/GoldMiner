@@ -24,3 +24,8 @@ Before pushing any code to the repository or using the `submit` tool, you must e
 ## 4. UI/Web Testing Constraints
 - The automated GitHub Pages deployment runs headless.
 - You cannot see the screen. Any UI interactions must be simulated either via `Input.action_press()` in GDScript (like the GM tools 'K' and 'T') or using headless browser testing tools (Playwright/Puppeteer) combined with console log scraping.
+
+## 5. Proactive Optimization Suggestions
+As an AI Agent working on this project, you must not only fulfill the explicit requests of the user but also proactively identify areas for improvement.
+- **Workflow**: After completing the primary task, briefly review the code you modified or interacted with. Look for performance bottlenecks (e.g., lack of object pooling, heavy physics queries), architectural flaws (e.g., tight coupling), or web-export inefficiencies.
+- **Action**: Always append a short "Optimization Suggestions" section in your communication to the user, proposing 1-2 concrete ways to improve the project's performance, UX, or code quality. Do not implement these unsolicited without the user's consent, but always offer them.
