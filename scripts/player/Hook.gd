@@ -15,6 +15,9 @@ var current_length: float = 0.0
 var grabbed_item: Node2D = null
 
 @onready var origin_point: Vector2 = position
+@onready var _tip_node: Node2D = get_node_or_null("Tip")
+@onready var _line_node: Line2D = get_node_or_null("Line2D")
+@onready var _aim_line: Line2D = get_node_or_null("AimLine")
 
 func _ready() -> void:
 	rotation_degrees = -max_swing_angle
@@ -75,20 +78,17 @@ func _update_hook_position() -> void:
 	var tip_pos = dir * (50.0 + current_length)
 	
 	# Assuming there's a child node called "Tip" that has the Area2D
-	var tip_node = get_node_or_null("Tip")
-	if tip_node:
-		tip_node.position = tip_pos
+	if _tip_node:
+		_tip_node.position = tip_pos
 		
 	# Update Line2D
-	var line_node = get_node_or_null("Line2D")
-	if line_node:
-		line_node.points = [Vector2.ZERO, tip_pos]
+	if _line_node:
+		_line_node.points = [Vector2.ZERO, tip_pos]
 		
 	# Fix AimLine offset: The rope starts at (0,0), tip defaults at (0,50). 
 	# The AimLine should start exactly where the tip is and point downwards.
-	var aim_line = get_node_or_null("AimLine")
-	if aim_line and current_state == HookState.SWINGING:
-		aim_line.points = [tip_pos, Vector2.DOWN * 1200.0]
+	if _aim_line and current_state == HookState.SWINGING:
+		_aim_line.points = [tip_pos, Vector2.DOWN * 1200.0]
 
 func fire() -> void:
 	if current_state == HookState.SWINGING:
@@ -122,11 +122,10 @@ func grab_item(item: Node2D) -> void:
 		item.set_deferred("monitorable", false)
 	
 	# Reparent the item to the tip so it follows the hook
-	var tip_node = get_node_or_null("Tip")
-	if tip_node:
+	if _tip_node:
 		var global_pos = item.global_position
 		item.get_parent().remove_child(item)
-		tip_node.add_child(item)
+		_tip_node.add_child(item)
 		# Animate moving item to exact tip center if needed
 		item.position = Vector2.ZERO
 		
