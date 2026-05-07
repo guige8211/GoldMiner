@@ -21,14 +21,12 @@ func generate_level(level_number: int, target_quota: int) -> void:
 		"rock": {"scene": load("res://scenes/items/Rock.tscn"), "value": 10, "radius": 35}
 	}
 	var items_root = get_node(items_root_path)
-	print("Generating level: ", level_number, " with quota: ", target_quota)
 	if items_root:
-		print("Items root found")
-	else:
-		print("ERROR: Items root NOT found!")
-		return
 		for child in items_root.get_children():
 			child.queue_free()
+	else:
+		push_error("Items root NOT found!")
+		return
 	
 	# 1. Calculate Value Budget
 	# In the future, K will decrease as meta-progression gives players passive bonuses
@@ -78,15 +76,12 @@ func generate_level(level_number: int, target_quota: int) -> void:
 		num_rocks = 1 + int(level_number * 1.2) + (randi() % 2)
 		for i in range(num_rocks):
 			_spawn_specific_item("rock", items_root, spawned_positions, spawn_counts, ITEMS)
-	
-	print("Level %d Generated. Quota: $%d | Total Value on field: $%d" % [level_number, target_quota, current_value])
-	print("Spawns: ", spawn_counts)
 
 func _spawn_specific_item(item_key: String, root: Node, spawned_positions: Array[Vector2], spawn_counts: Dictionary, ITEMS: Dictionary) -> void:
 	var data = ITEMS[item_key]
 	var scene = data["scene"] as PackedScene
 	if not scene:
-		print("ERROR: Scene for ", item_key, " is NULL! Did you assign it in the inspector?")
+		push_error("Scene for %s is NULL! Did you assign it in the inspector?" % item_key)
 		return
 		
 	var item = scene.instantiate()
